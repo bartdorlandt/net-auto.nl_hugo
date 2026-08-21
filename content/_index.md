@@ -71,7 +71,7 @@ We organize regular meetups featuring interesting talks and networking opportuni
 ## 🌟 Community Highlights
 
 {{< tabs >}}
-{{< tab title="Speakers" >}}
+{{< tab label="Speakers" >}}
 Our meetups bring together network automation enthusiasts of all levels, opening the stage to whoever has something interesting to share
 
 - Network automation strategies
@@ -84,7 +84,7 @@ Our meetups bring together network automation enthusiasts of all levels, opening
   {{< img src="images/presentation2.jpeg" alt="Presentation at NLNAM Meetup" width="600" sizes="(max-width: 48em) 100vw, 50vw" >}}
 </div>
 {{< /tab >}}
-{{< tab title="Networking" >}}
+{{< tab label="Networking" >}}
 Connect with other professionals active in the Dutch network automation scene:
 
 - Telecom companies
