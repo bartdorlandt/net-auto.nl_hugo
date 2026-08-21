@@ -1,20 +1,22 @@
 ---
-title: NLNAM Meetup @ Adyen with Netpicker
+title: NLNAM Meetup 1 @ Adyen with Netpicker
 description: 2026-02-05 NLNAM Meetup event
+host: "Adyen, sponsored by Netpicker / Slurpit"
+registerURL: "https://nlnam_adyen_netpicker.eventbrite.nl/"
+venue: "Rokin 49, Amsterdam"
+doorsOpen: "17:30"
+endsAt: "21:00"
 # Event date: drives the upcoming/previous split.
 date: 2026-02-05
 publishDate: 2025-11-14
 lastmod: 2026-02-10
+# Days before the event; rendered by layouts/events/single.html.
+registrationClosesDaysBefore: 1
+cfpClosesDaysBefore: 30
 ---
 
-The next meetup is hosted by [Adyen](https://www.adyen.com/) & [Netpicker](https://netpicker.io/) / [Slurpit](https://slurpit.io/) on 2026-02-05.
 
 Thank you Adyen for providing your office space to host us and Netpicker/Slurpit for sponsoring the pizzas and drinks!
-
-* [Register for the event](https://nlnam_adyen_netpicker.eventbrite.nl/)
-    * Registration ends on February 2nd at 23:59.
-    * We are only able to support a limited number of people at the venue so if you cannot attend please be sure to unregister to free up the ticket for someone else.
-* [Submit a presentation proposal](https://forms.gle/qmjaMqcHLuJV3rTy8)
 
 ## Specifics
 * **<u>Bring your ID</u>** to enter the Adyen building.

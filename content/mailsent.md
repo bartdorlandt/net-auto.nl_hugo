@@ -1,8 +1,12 @@
 ---
 title: "Message sent"
 description: "Your message has been sent."
-disableDate: true
-toc: false
+showDate: false
+showWordCount: false
+showReadingTime: false
+showAuthor: false
+showPagination: false
+showTableOfContents: false
 sitemap:
   disable: true
 ---

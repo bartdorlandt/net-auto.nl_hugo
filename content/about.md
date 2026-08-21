@@ -1,23 +1,62 @@
 ---
 title: "👥 About us"
 description: "About the NL Network Automation Meetup (NLNAM), a volunteer-run meetup in the Netherlands focused on network automation."
-disableDate: true
-toc: true
+showDate: false
+showWordCount: false
+showReadingTime: false
+showAuthor: false
+showPagination: false
+showTableOfContents: false
 ---
 
-The Netherlands Network Automation Meetup (NLNAM) is a volunteer-run meetup hosting periodic meetups in the Netherlands focused around network automation.
-We aim to bring together network engineers, developers, and IT professionals interested in network automation to share knowledge, experiences and best practices.
+<div class="about-intro">
+<div class="about-intro-copy">
 
-## History
+NLNAM is a volunteer-run meetup for network automation in the Netherlands. We bring together network engineers, developers and IT professionals to exchange knowledge, war stories and things that actually worked.
 
-The idea to start a network automation meetup in the Netherlands was conceived in Prague between Bart and Dan, while having breakfast. This was during the [Autocon 3](http://networkautomation.forum/autocon3) event.
+- **Free to attend** — every meetup, always
+- **Hosted by a different company** each time
+- **Open stage** — anyone with something interesting can speak
+- **Pizza and drinks**, courtesy of our sponsors
+
+</div>
+
+{{< img src="images/bart_dan_portrait.jpeg" alt="Bart Dorlandt and Dan Peachey at the NLNAM meetup hosted by Adyen" width="700" class="about-portrait" >}}
+
+</div>
+
+## How it started
+
+The idea was hatched over breakfast in Prague, between Bart and Dan, during
+[Autocon 3](http://networkautomation.forum/autocon3). The first meetup followed
+shortly after — and we have been running them ever since.
 
 ## Organizers
 
-The NL Network Automation Meetup is organized by a group of dedicated volunteers who are passionate about network automation and fostering a collaborative community. The current organizers are:
+<div class="organizers">
+  <div class="organizer-card">
+    <p class="organizer-name">Bart Dorlandt</p>
+    <p class="organizer-role">Co-organizer</p>
+    <p class="organizer-links">
+      <a href="https://www.linkedin.com/in/bartdorlandt/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </div>
+  <div class="organizer-card">
+    <p class="organizer-name">Dan Peachey</p>
+    <p class="organizer-role">Co-organizer</p>
+    <p class="organizer-links">
+      <a href="https://www.linkedin.com/in/dpeachey/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </div>
+</div>
 
-- [Bart Dorlandt](https://www.linkedin.com/in/bartdorlandt/)
-- [Dan Peachey](https://www.linkedin.com/in/dpeachey/)
+## Get involved
 
-## LinkedIn Group
-We have a [LinkedIn Group](https://www.linkedin.com/groups/15393055/) where members can connect, share insights, and stay updated on upcoming events and discussions related to network automation.
+Whether you want to speak, host a meetup, sponsor the pizzas, or just turn up
+and listen — there is room for you.
+
+<div class="stay-connected-buttons">
+  <a href="/events/" class="cta-button">See upcoming events</a>
+  <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener" class="cta-button">Join the LinkedIn group</a>
+  <a href="/contact/" class="cta-button">Host or sponsor</a>
+</div>

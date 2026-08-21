@@ -1,8 +1,12 @@
 ---
 title: "✉️ Contact"
 description: "Get in touch with the NL Network Automation Meetup organizers."
-disableDate: true
-toc: false
+showDate: false
+showWordCount: false
+showReadingTime: false
+showAuthor: false
+showPagination: false
+showTableOfContents: false
 ---
 
 Want to host a meetup, sponsor, speak, or just say hello? Send us a message.

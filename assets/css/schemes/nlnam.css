@@ -1,0 +1,54 @@
+/* NLNAM colour scheme.
+ *
+ * Derived from the logo, which is built on the Dutch flag: a red node ring,
+ * a blue "</>" hub and near-white counters, wired together with slate links.
+ *
+ *   red   #c8102e   secondary  (accents, hover, the "N-L" half of the wordmark)
+ *   blue  #1e3fa8   primary    (links, buttons, the "NAM" half)
+ *   navy  #0b1230   neutral-900 (node outlines, dark-mode canvas)
+ *   slate #64748b   neutral-500 (the connecting lines)
+ *
+ * Blowfish expects each colour as bare "r, g, b" so Tailwind can wrap it in
+ * rgb(... / <alpha>). Ramps are hand-tuned rather than generated so 500 lands
+ * exactly on the logo colour.
+ */
+
+:root {
+  /* Neutral: a cool, navy-leaning grey so the chrome sits in the same family
+     as the logo's node outlines instead of reading as plain black. */
+  --color-neutral: 255, 255, 255;
+  --color-neutral-50: 248, 249, 252;
+  --color-neutral-100: 241, 243, 249;
+  --color-neutral-200: 226, 231, 242;
+  --color-neutral-300: 202, 210, 228;
+  --color-neutral-400: 148, 160, 186;
+  --color-neutral-500: 100, 116, 139;
+  --color-neutral-600: 71, 85, 108;
+  --color-neutral-700: 45, 56, 78;
+  --color-neutral-800: 26, 34, 54;
+  --color-neutral-900: 11, 18, 48;
+
+  /* Primary: logo blue. 500 = #1e3fa8. */
+  --color-primary-50: 240, 244, 255;
+  --color-primary-100: 224, 232, 254;
+  --color-primary-200: 195, 210, 253;
+  --color-primary-300: 150, 175, 250;
+  --color-primary-400: 99, 130, 236;
+  --color-primary-500: 30, 63, 168;
+  --color-primary-600: 26, 54, 145;
+  --color-primary-700: 21, 44, 118;
+  --color-primary-800: 17, 35, 94;
+  --color-primary-900: 13, 26, 70;
+
+  /* Secondary: logo red. 500 = #c8102e. */
+  --color-secondary-50: 255, 241, 243;
+  --color-secondary-100: 255, 227, 231;
+  --color-secondary-200: 254, 197, 206;
+  --color-secondary-300: 250, 150, 165;
+  --color-secondary-400: 232, 79, 103;
+  --color-secondary-500: 200, 16, 46;
+  --color-secondary-600: 172, 13, 39;
+  --color-secondary-700: 140, 11, 32;
+  --color-secondary-800: 108, 9, 25;
+  --color-secondary-900: 79, 7, 19;
+}

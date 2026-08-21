@@ -1,6 +1,11 @@
 ---
 title: NLNAM Meetup 3 @ One Zero IT
 description: 2026-09-09 NLNAM Meetup 3
+host: "One Zero IT"
+registerURL: "https://pretix.eu/nlnam/20260909-onezeroit/"
+venue: "Van Deventerlaan 30-40, Utrecht"
+doorsOpen: "18:00"
+endsAt: "23:00"
 date: 2026-09-09
 publishDate: 2026-02-24
 lastmod: 2026-02-24
@@ -9,21 +14,11 @@ registrationClosesDaysBefore: 1
 cfpClosesDaysBefore: 30
 ---
 
-The next meetup is hosted by [One Zero IT](https://onezeroit.com/) on 2026-09-09.
-
 Thank you One Zero IT for opening your doors to host us and fill our bellies with pizzas and drinks!
-
-* [Register for the event](https://pretix.eu/nlnam/20260909-onezeroit/)
-    * Registration ends on {{< registration-closes >}} at 23:59.
-* [Submit a presentation proposal](https://forms.gle/qmjaMqcHLuJV3rTy8)
-    * Talks will be selected and communicated around {{< cfp-closes >}}.
 
 ## Specifics
 * Parking is available, ring the bell, park on "90 North" spots
 * The office is on the 2nd floor
-
-## Location
-{{< maps "Van Deventerlaan 30-40, Utrecht" >}}
 
 ## Agenda
 

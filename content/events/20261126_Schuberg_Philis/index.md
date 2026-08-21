@@ -1,27 +1,23 @@
 ---
 title: NLNAM Meetup 4 @ Schuberg Philis
 description: 2026-11-26 NLNAM Meetup 4
+host: "Schuberg Philis"
+registerURL: "https://pretix.eu/nlnam/20261126-schubergphilis/"
+venue: "Boeingavenue 271, Schiphol-Rijk"
+doorsOpen: "17:30"
+endsAt: "23:00"
 date: 2026-11-26
 publishDate: 2026-07-23
 lastmod: 2026-07-23
+# Days before the event; rendered by layouts/events/single.html.
 registrationClosesDaysBefore: 1
 cfpClosesDaysBefore: 30
 ---
 
-The next meetup is hosted by [Schuberg Philis](https://schubergphilis.com/) on 2026-11-26.
-
 Thank you Schuberg Philis for opening your doors to host us and fill our bellies with an awesome buffet and drinks!
-
-* [Register for the event](https://pretix.eu/nlnam/20261126-schubergphilis/)
-    * Registration ends on {{< registration-closes >}} at 23:59.
-* [Submit a presentation proposal](https://forms.gle/qmjaMqcHLuJV3rTy8)
-    * Talks will be selected and communicated around {{< cfp-closes >}}.
 
 ## Specifics
 * Parking is available
-
-## Location
-{{< maps "Boeingavenue 271, 1119 PD Schiphol-Rijk" >}}
 
 ## Agenda
 

@@ -1,6 +1,10 @@
 ---
 title: "🌐 Welcome to NL Network Automation Meetup"
-heroLead: "Connecting Network Automation Professionals in the Netherlands"
+# heroLead: "Connecting Network Automation Professionals in the Netherlands"
+# The body card below already carries these CTAs; suppress the hero copy
+# of them so the same two links do not appear twice. See
+# layouts/partials/home/landing.html.
+heroButtonsInContent: true
 heroButtons:
   - label: "📅 Upcoming Events"
     url: "/events/"
@@ -12,10 +16,10 @@ description: "The Netherlands Network Automation Meetup (NLNAM) - a community of
 
 <div class="network-automation-card">
   <h2 style="margin-top: 0;">Connecting Network Automation Professionals in the Netherlands</h2>
-  <div style="display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;">
-    <div style="flex: 1; min-width: 250px;">
+  <div class="hero-card-grid">
+    <div class="hero-card-copy">
       <p>The Netherlands Network Automation Meetup (NLNAM) is a vibrant community of network engineers, DevOps practitioners, automation enthusiasts and software developers who are passionate about modernizing network infrastructure through code.</p>
-      <p style="text-align: center; margin-top: 1.5rem;">
+      <p class="hero-card-actions">
         <a href="/events/" class="cta-button">📅 Upcoming Events</a>
         <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener" class="cta-button">🤝 Join Us on LinkedIn</a>
       </p>
@@ -30,6 +34,8 @@ description: "The Netherlands Network Automation Meetup (NLNAM) - a community of
 {{< admonition type="automation" title="Network Automation Focus" >}}
 We organize regular meetups featuring interesting talks and networking opportunities for professionals working with, but not limited to:
 
+<div class="two-col-list">
+
 - **Infrastructure as Code**
 - **Source of Truth (SoT)**
 - **Configuration Management**
@@ -40,6 +46,8 @@ We organize regular meetups featuring interesting talks and networking opportuni
 - **Validation & Testing**
 - **Workflow Automation**
 - **And more...**
+
+</div>
 {{< /admonition >}}
 
 ## 🏢 Locations & Sponsors
@@ -71,9 +79,9 @@ Our meetups bring together network automation enthusiasts of all levels, opening
 - NetDevOps best practices
 - Tool comparisons and recommendations
 
-<div style="display: flex; gap: 1rem;">
-  {{< img src="images/presentation1.jpeg" alt="Presentation at NLNAM Meetup" width="600" sizes="(max-width: 48em) 100vw, 50vw" style="width: 50%; height: auto; border-radius: 8px;" >}}
-  {{< img src="images/presentation2.jpeg" alt="Presentation at NLNAM Meetup" width="600" sizes="(max-width: 48em) 100vw, 50vw" style="width: 50%; height: auto; border-radius: 8px;" >}}
+<div class="photo-pair">
+  {{< img src="images/presentation1.jpeg" alt="Presentation at NLNAM Meetup" width="600" sizes="(max-width: 48em) 100vw, 50vw" >}}
+  {{< img src="images/presentation2.jpeg" alt="Presentation at NLNAM Meetup" width="600" sizes="(max-width: 48em) 100vw, 50vw" >}}
 </div>
 {{< /tab >}}
 {{< tab title="Networking" >}}
@@ -99,6 +107,6 @@ Join our community and stay updated on the latest in network automation:
 
 ---
 
-<div style="text-align: center; color: #999; font-style: italic;">
+<div class="site-tagline">
   <p>🚀 <span class="network-term">Automating the Future</span> of (Dutch) Networking 🇳🇱</p>
 </div>

@@ -1,0 +1,1276 @@
+/* NLNAM site styling.
+ *
+ * Layered on top of Blowfish + the nlnam colour scheme. Everything here is
+ * plain CSS driven by the scheme's --color-* triples, so re-tuning the palette
+ * in schemes/nlnam.css re-tunes the whole site.
+ *
+ * The class names (.cta-button, .network-automation-card, .topology-container,
+ * .admonition.automation, .network-term, event tiles) are carried over from the
+ * old MkDocs Material site so the migrated markdown keeps working.
+ */
+
+:root {
+  --nlnam-red: rgb(var(--color-secondary-500));
+  --nlnam-red-dark: rgb(var(--color-secondary-700));
+  --nlnam-blue: rgb(var(--color-primary-500));
+  --nlnam-blue-dark: rgb(var(--color-primary-700));
+  --nlnam-navy: rgb(var(--color-neutral-900));
+
+  /* Panel surfaces: near-white in light mode, navy in dark. */
+  --nlnam-panel: rgb(var(--color-neutral-50));
+  --nlnam-panel-alt: rgb(var(--color-neutral-100));
+  --nlnam-panel-border: rgb(var(--color-neutral-200));
+  --nlnam-shadow: rgba(var(--color-neutral-900), 0.08);
+  --nlnam-shadow-strong: rgba(var(--color-neutral-900), 0.14);
+}
+
+html.dark {
+  --nlnam-panel: rgb(var(--color-neutral-800));
+  --nlnam-panel-alt: rgb(var(--color-neutral-900));
+  --nlnam-panel-border: rgba(255, 255, 255, 0.08);
+  --nlnam-shadow: rgba(0, 0, 0, 0.35);
+  --nlnam-shadow-strong: rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------------------------------------------------------- flag rule
+ * A three-band red/white/blue divider. Used as a top accent on the hero card
+ * and as the styling for plain `---` horizontal rules in content.
+ */
+.prose hr,
+.nlnam-flag-rule {
+  height: 5px;
+  border: 0;
+  border-radius: 3px;
+  /* The centre band is white; without an outline it vanishes on a light page. */
+  box-shadow: inset 0 0 0 1px rgba(var(--color-neutral-500), 0.28);
+  background: linear-gradient(
+    to right,
+    var(--nlnam-red) 0 33.34%,
+    rgb(var(--color-neutral-100)) 33.34% 66.67%,
+    var(--nlnam-blue) 66.67% 100%
+  );
+  opacity: 1;
+}
+
+html.dark .prose hr,
+html.dark .nlnam-flag-rule {
+  background: linear-gradient(
+    to right,
+    var(--nlnam-red) 0 33.34%,
+    rgb(var(--color-neutral-300)) 33.34% 66.67%,
+    rgb(var(--color-primary-400)) 66.67% 100%
+  );
+}
+
+/* --------------------------------------------------------- landing hero
+ * The theme's hero used pt-12 / sm:pt-20, which left an 80px void between the
+ * floating header and the title. The header already provides visual
+ * separation, so this is tightened to a third of that.
+ */
+.landing-hero {
+  padding-top: 1.5rem;
+  /* Gap between the title and the hero card below it. */
+  padding-bottom: 3.5rem;
+}
+
+@media (min-width: 40em) {
+  .landing-hero {
+    padding-top: 2rem;
+  }
+}
+
+/* Breathing room under the title. `heroLead` is commented out in
+   content/_index.md (the hero card's own h2 carries that sentence), so the
+   next thing after the title is the content section. Covers both cases: the
+   lead paragraph if it is ever re-enabled, and the gap to the content below. */
+.landing-hero h1 + p,
+.landing-hero h1 ~ p:first-of-type {
+  margin-top: 2.25rem;
+}
+
+/* ------------------------------------------------------- landing content
+ * `prose-lg` carries `max-width: 65ch` (~736px). Tailwind's `max-w-none`
+ * utility lives in the same cascade layer, so it does not reliably beat it and
+ * the homepage column silently collapsed to 736px. custom.css is concatenated
+ * last in the head.html bundle, so overriding here is unambiguous.
+ *
+ * Scoped to the landing content wrapper -- prose keeps its comfortable
+ * measure everywhere else (articles, event pages), where a long line length
+ * would genuinely hurt readability. The homepage is card-and-panel layout, not
+ * running text, so it wants the full column.
+ */
+.landing-content.prose {
+  max-width: none;
+}
+
+/* ------------------------------------------------------------------- hero
+ * The homepage intro card. The old site used a purple gradient; this is the
+ * logo's navy-to-blue with a flag stripe along the top edge.
+ */
+.network-automation-card {
+  position: relative;
+  overflow: hidden;
+  margin: 1.5rem 0 2rem;
+  padding: 2rem;
+  border-radius: 16px;
+  /* Lighter blue on the left, deepening to navy on the right, so the card
+     is brightest behind the heading and copy and darkest behind the logo. */
+  background: linear-gradient(135deg, var(--nlnam-blue) 0%, var(--nlnam-blue-dark) 45%, var(--nlnam-navy) 100%);
+  color: #fff;
+  box-shadow: 0 12px 32px var(--nlnam-shadow-strong);
+}
+
+.network-automation-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  /* Sits on the card's dark gradient, so plain white reads correctly here. The
+     blue band is lightened so it separates from the navy underneath. */
+  background: linear-gradient(
+    to right,
+    var(--nlnam-red) 0 33.34%,
+    #fff 33.34% 66.67%,
+    rgb(var(--color-primary-300)) 66.67% 100%
+  );
+}
+
+.network-automation-card h2,
+.network-automation-card h3,
+.network-automation-card p,
+.network-automation-card li,
+.network-automation-card strong {
+  color: #fff;
+}
+
+.network-automation-card a:not(.cta-button) {
+  color: rgb(var(--color-primary-200));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Copy on the left, logo on the right; stacks below ~44rem. The logo column
+   is capped as a fraction rather than left `auto`, otherwise the 420px asset
+   claims half the card and squeezes the paragraph into a 3-word-wide ribbon. */
+.hero-card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.hero-card-grid .hero-logo {
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.hero-card-copy > :first-child {
+  margin-top: 0;
+}
+
+.hero-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+/* Inside the hero card the buttons share a narrow column, so let them size to
+   their label instead of inheriting the full-width mobile rule below. */
+.hero-card-actions .cta-button {
+  width: auto;
+  margin: 0;
+}
+
+/* The logo sits on the card's dark background, so it needs no plate. */
+.hero-logo {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 44em) {
+  .hero-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hero-card-actions {
+    justify-content: center;
+  }
+}
+
+/* ---------------------------------------------------------------- photos */
+.photo-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.photo-pair img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px var(--nlnam-shadow);
+}
+
+.site-tagline {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-style: italic;
+  color: rgb(var(--color-neutral-500));
+}
+
+/* ------------------------------------------------------------- cta buttons
+ * Primary = logo blue. Every second button in a row picks up the red so the
+ * pairs read as the flag rather than as a wall of blue. Kept as a class (not
+ * a Blowfish partial) because the migrated markdown writes it inline.
+ */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0.6rem 0.4rem 0;
+  padding: 0.7rem 1.4rem;
+  min-height: 2.9rem;
+  border-radius: 12px;
+  background: var(--nlnam-blue);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-decoration: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 6px 18px rgba(var(--color-primary-900), 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover,
+.cta-button:focus-visible {
+  background: rgb(var(--color-primary-400));
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(var(--color-primary-900), 0.36);
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid rgb(var(--color-primary-200));
+  outline-offset: 2px;
+}
+
+/* Alternate blue/red across a button group. */
+.network-automation-card .cta-button:nth-of-type(even),
+.stay-connected-buttons .cta-button:nth-of-type(even) {
+  background: var(--nlnam-red);
+  box-shadow: 0 6px 18px rgba(var(--color-secondary-900), 0.3);
+}
+
+.network-automation-card .cta-button:nth-of-type(even):hover,
+.stay-connected-buttons .cta-button:nth-of-type(even):hover {
+  background: rgb(var(--color-secondary-400));
+  box-shadow: 0 10px 24px rgba(var(--color-secondary-900), 0.38);
+}
+
+.stay-connected-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+/* --------------------------------------------------------------- panels
+ * .topology-container is the "looking for hosts" call-out. Blue left rule,
+ * subtle surface, no gradient soup.
+ */
+.topology-container {
+  margin: 1.5rem 0;
+  padding: 1.5rem 1.75rem;
+  border-radius: 14px;
+  border: 1px solid var(--nlnam-panel-border);
+  border-left: 5px solid var(--nlnam-blue);
+  background: var(--nlnam-panel);
+  box-shadow: 0 4px 16px var(--nlnam-shadow);
+}
+
+.topology-container > :first-child {
+  margin-top: 0;
+}
+
+.topology-container > :last-child {
+  margin-bottom: 0;
+}
+
+.topology-container h3 {
+  color: var(--nlnam-blue);
+  margin-top: 0;
+}
+
+html.dark .topology-container h3 {
+  color: rgb(var(--color-primary-300));
+}
+
+/* ------------------------------------------------------------- admonitions
+ * Blowfish ships its own admonition component for GitHub-style callouts. The
+ * migrated content uses a custom shortcode with .automation / .network types,
+ * so those get their own styling here in the brand colours.
+ */
+.admonition {
+  margin: 1.5rem 0;
+  padding: 0 1.25rem 0.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--nlnam-panel-border);
+  border-left: 5px solid rgb(var(--color-neutral-400));
+  background: var(--nlnam-panel);
+  box-shadow: 0 2px 10px var(--nlnam-shadow);
+}
+
+.admonition .admonition-title {
+  margin: 0 -1.25rem 0.75rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 11px 11px 0 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  background: rgba(var(--color-neutral-500), 0.1);
+  color: rgb(var(--color-neutral-700));
+}
+
+html.dark .admonition .admonition-title {
+  color: rgb(var(--color-neutral-200));
+}
+
+.admonition > :last-child {
+  margin-bottom: 0.9rem;
+}
+
+/* Automation: blue, the "we build things" tone. */
+.admonition.automation {
+  border-left-color: var(--nlnam-blue);
+}
+
+.admonition.automation .admonition-title {
+  background: rgba(var(--color-primary-500), 0.12);
+  color: var(--nlnam-blue-dark);
+}
+
+html.dark .admonition.automation .admonition-title {
+  color: rgb(var(--color-primary-200));
+}
+
+/* Network: red, the second flag colour, for venue/logistics notes. */
+.admonition.network {
+  border-left-color: var(--nlnam-red);
+}
+
+.admonition.network .admonition-title {
+  background: rgba(var(--color-secondary-500), 0.12);
+  color: var(--nlnam-red-dark);
+}
+
+html.dark .admonition.network .admonition-title {
+  color: rgb(var(--color-secondary-200));
+}
+
+.admonition.tip {
+  border-left-color: rgb(16, 185, 129);
+}
+
+.admonition.tip .admonition-title {
+  background: rgba(16, 185, 129, 0.12);
+  color: rgb(6, 95, 70);
+}
+
+html.dark .admonition.tip .admonition-title {
+  color: rgb(110, 231, 183);
+}
+
+/* ----------------------------------------------------------------- about
+ * Banner photo plus organiser cards.
+ */
+/* The theme wraps article bodies in `max-w-prose` (~65ch), which is right for
+   reading but leaves a wide banner photo small and stranded. Let just the
+   banner break out of that measure; the surrounding text keeps it. */
+/* The theme caps article bodies at `max-w-prose` (~655px). That measure is
+   right for running text but too narrow to set copy beside a portrait, so
+   widen the container on this page -- :has() scopes it here only, leaving
+   event and other article pages untouched. */
+.article-content:has(.about-intro) {
+  max-width: 56rem;
+}
+
+/* Standalone paragraphs keep a comfortable reading measure; the intro grid,
+   cards and button row use the full width. */
+.article-content:has(.about-intro) > p,
+.article-content:has(.about-intro) > h2 {
+  max-width: 41rem;
+}
+
+/* Intro: copy on the left, portrait on the right. */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  margin: 0.5rem 0 2.5rem;
+}
+
+.about-intro-copy > :first-child {
+  margin-top: 0;
+}
+
+.about-intro-copy > :last-child {
+  margin-bottom: 0;
+}
+
+.about-portrait {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 26px var(--nlnam-shadow);
+}
+
+@media (max-width: 48em) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Portrait first on mobile: it is the thing worth leading with when there is
+     no room to set it beside the copy. */
+  .about-portrait {
+    order: -1;
+    max-width: 22rem;
+    justify-self: center;
+  }
+}
+
+.about-banner {
+  width: 100%;
+  height: auto;
+  margin: 0.5rem 0 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 26px var(--nlnam-shadow);
+}
+
+.organizers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.organizer-card {
+  padding: 1.15rem 1.35rem;
+  border-radius: 14px;
+  border: 1px solid var(--nlnam-panel-border);
+  border-left: 4px solid var(--nlnam-blue);
+  background: var(--nlnam-panel);
+  box-shadow: 0 4px 16px var(--nlnam-shadow);
+}
+
+/* Alternate the accent so a pair of organisers reads as red/blue rather than
+   two identical blue cards. */
+.organizer-card:nth-child(even) {
+  border-left-color: var(--nlnam-red);
+}
+
+.organizer-card p {
+  margin: 0;
+}
+
+.organizer-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(var(--color-neutral-900));
+}
+
+html.dark .organizer-name {
+  color: rgb(var(--color-neutral-100));
+}
+
+.organizer-role {
+  margin-top: 0.15rem !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgb(var(--color-neutral-500));
+}
+
+.organizer-links {
+  margin-top: 0.6rem !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+/* The shared .stay-connected-buttons rule centres its row (correct on the
+   homepage); on this page everything else is left-aligned, so align to match. */
+.article-content:has(.about-banner) .stay-connected-buttons {
+  justify-content: flex-start;
+  margin-top: 1.25rem;
+}
+
+.organizer-links a {
+  color: var(--nlnam-blue);
+  text-decoration: none;
+}
+
+.organizer-links a:hover {
+  text-decoration: underline;
+}
+
+html.dark .organizer-links a {
+  color: rgb(var(--color-primary-300));
+}
+
+/* ------------------------------------------------------------- host pitch
+ * Closing call-to-action on /events/. Styled as a panel rather than more body
+ * copy so it reads as an aside, not as another event.
+ */
+.host-pitch {
+  margin: 3rem 0 1rem;
+  padding: 1.75rem 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--nlnam-panel-border);
+  border-left: 5px solid var(--nlnam-red);
+  background: var(--nlnam-panel);
+  box-shadow: 0 6px 20px var(--nlnam-shadow);
+}
+
+.host-pitch-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-neutral-900));
+}
+
+html.dark .host-pitch-title {
+  color: rgb(var(--color-neutral-100));
+}
+
+.host-pitch-lead {
+  margin: 0 0 1rem;
+  max-width: 50rem;
+  color: rgb(var(--color-neutral-600));
+}
+
+html.dark .host-pitch-lead {
+  color: rgb(var(--color-neutral-300));
+}
+
+.host-pitch-list {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.5rem 1.5rem;
+}
+
+.host-pitch-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.95rem;
+  color: rgb(var(--color-neutral-700));
+}
+
+html.dark .host-pitch-list li {
+  color: rgb(var(--color-neutral-200));
+}
+
+/* Check marks rather than bullets: these are things the host receives. */
+.host-pitch-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 0.5rem;
+  height: 0.28rem;
+  border-left: 2px solid var(--nlnam-red);
+  border-bottom: 2px solid var(--nlnam-red);
+  transform: rotate(-45deg);
+}
+
+.host-pitch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.host-pitch-actions .cta-button {
+  margin: 0;
+}
+
+.host-pitch-direct {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgb(var(--color-neutral-500));
+}
+
+.host-pitch-direct a {
+  color: var(--nlnam-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.host-pitch-direct a:hover {
+  text-decoration: underline;
+}
+
+html.dark .host-pitch-direct a {
+  color: rgb(var(--color-primary-300));
+}
+
+@media (max-width: 40em) {
+  .host-pitch {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .host-pitch-actions .cta-button {
+    width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------- event header
+ * The masthead on a single event page. Date block on the left (same visual
+ * language as the tiles on /events/), facts and actions on the right.
+ */
+.event-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: start;
+  margin: 1.5rem 0 2.5rem;
+  /* Extra leading padding clears the flag stripe drawn by ::before. */
+  padding: 1.75rem 1.75rem 1.75rem 2.25rem;
+  border-radius: 18px;
+  border: 1px solid var(--nlnam-panel-border);
+  background: var(--nlnam-panel);
+  box-shadow: 0 8px 26px var(--nlnam-shadow);
+}
+
+/* Flag stripe down the leading edge, echoing the homepage hero card. */
+.event-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  border-radius: 18px 0 0 18px;
+  background: linear-gradient(
+    to bottom,
+    var(--nlnam-red) 0 33.34%,
+    rgb(var(--color-neutral-200)) 33.34% 66.67%,
+    var(--nlnam-blue) 66.67% 100%
+  );
+}
+
+.event-header-date {
+  min-width: 5.5rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--nlnam-blue) 0%, var(--nlnam-navy) 100%);
+  color: #fff;
+}
+
+.event-header-day {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.event-header-month {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.event-header-year {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.event-header-eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nlnam-blue);
+}
+
+html.dark .event-header-eyebrow {
+  color: rgb(var(--color-primary-300));
+}
+
+.is-past .event-header-eyebrow {
+  color: rgb(var(--color-neutral-500));
+}
+
+/* A finished meetup should not look like a live one. */
+.is-past .event-header-date {
+  background: linear-gradient(135deg,
+    rgb(var(--color-neutral-500)) 0%, rgb(var(--color-neutral-700)) 100%);
+}
+
+.event-header-sep {
+  margin: 0 0.35rem;
+  opacity: 0.5;
+}
+
+.event-header-title {
+  margin: 0 0 1rem;
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgb(var(--color-neutral-900));
+}
+
+html.dark .event-header-title {
+  color: rgb(var(--color-neutral-100));
+}
+
+/* Facts read as label/value pairs rather than prose, so the reader can scan
+   for the one thing they came for. */
+.event-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0.85rem 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.event-fact dt {
+  margin-bottom: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgb(var(--color-neutral-500));
+}
+
+.event-fact dd {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: rgb(var(--color-neutral-800));
+}
+
+html.dark .event-fact dd {
+  color: rgb(var(--color-neutral-100));
+}
+
+.event-fact dd a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--color-primary-500), 0.45);
+  text-underline-offset: 3px;
+}
+
+.event-fact dd a:hover {
+  color: var(--nlnam-blue);
+}
+
+html.dark .event-fact dd a:hover {
+  color: rgb(var(--color-primary-300));
+}
+
+.event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.event-actions .cta-button {
+  margin: 0;
+}
+
+/* Secondary action: present but clearly subordinate to Register. */
+.cta-button-quiet {
+  background: transparent;
+  color: var(--nlnam-blue) !important;
+  border: 1px solid rgba(var(--color-primary-500), 0.5);
+  box-shadow: none;
+}
+
+.cta-button-quiet:hover {
+  background: rgba(var(--color-primary-500), 0.1);
+  color: var(--nlnam-blue) !important;
+  box-shadow: none;
+}
+
+html.dark .cta-button-quiet {
+  color: rgb(var(--color-primary-200)) !important;
+  border-color: rgba(var(--color-primary-300), 0.45);
+}
+
+html.dark .cta-button-quiet:hover {
+  background: rgba(var(--color-primary-300), 0.14);
+  color: rgb(var(--color-primary-100)) !important;
+}
+
+.event-deadline {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: rgb(var(--color-neutral-500));
+}
+
+@media (max-width: 40em) {
+  .event-header {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .event-header-date {
+    justify-self: start;
+    min-width: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+  }
+
+  /* Stacked, the tall date block wastes vertical space; run it inline. */
+  .event-header-day {
+    font-size: 1.6rem;
+  }
+
+  .event-header-month,
+  .event-header-year {
+    margin-top: 0;
+    font-size: 0.8rem;
+  }
+
+  .event-header-title {
+    font-size: 1.5rem;
+  }
+
+  .event-actions .cta-button {
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------ events list
+ * `prose` zeroes the top margin on a first-child heading, so "Upcoming events"
+ * sat flush against the intro paragraph above it. Restore some separation.
+ * Applies to both the populated and the empty-state heading in
+ * layouts/events/list.html.
+ */
+.events-sections > h2:first-child {
+  margin-top: 2.5rem;
+}
+
+/* ------------------------------------------------------------ two-col list
+ * Splits a long single-column bullet list into two columns. CSS columns is
+ * used rather than a grid of two separate lists so the markdown stays one
+ * semantic <ul> and reflows to a single column on narrow screens by itself.
+ */
+.two-col-list ul {
+  columns: 2;
+  column-gap: 2.5rem;
+  margin: 0;
+}
+
+.two-col-list li {
+  /* Keep each item whole rather than letting a wrapped item split across the
+     column break, and stop the first item pulling clear of the column top. */
+  break-inside: avoid;
+  margin-top: 0;
+}
+
+@media (max-width: 40em) {
+  .two-col-list ul {
+    columns: 1;
+  }
+}
+
+/* --------------------------------------------------------------- accents */
+.network-term {
+  background: linear-gradient(120deg, var(--nlnam-red), var(--nlnam-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.tech-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--nlnam-blue);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---------------------------------------------------------------- tables
+ * Agenda tables are the densest thing on the event pages, so they get a
+ * proper header band and zebra striping.
+ */
+.prose table {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--nlnam-shadow);
+}
+
+.prose thead {
+  background: linear-gradient(135deg, var(--nlnam-navy), var(--nlnam-blue));
+}
+
+.prose thead th {
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 0;
+}
+
+.prose tbody tr:nth-child(even) {
+  background: rgba(var(--color-neutral-500), 0.06);
+}
+
+/* Time column on agenda tables: fixed width, tabular figures, brand colour. */
+.prose tbody td:first-child {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--nlnam-blue);
+}
+
+html.dark .prose tbody td:first-child {
+  color: rgb(var(--color-primary-300));
+}
+
+/* ------------------------------------------------------------ event tiles */
+.events-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.event-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--nlnam-panel-border);
+  background: var(--nlnam-panel);
+  box-shadow: 0 6px 20px var(--nlnam-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px var(--nlnam-shadow-strong);
+}
+
+/* Stretch the title link across the whole tile so the entire card is
+   clickable. The <a> stays in normal flow for the accessible name and keyboard
+   order; only this overlay is what the pointer actually hits. */
+.event-tile-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* The tile is one big link, so show the hand cursor over all of it. */
+.event-tile {
+  cursor: pointer;
+}
+
+/* Focus ring belongs on the card, not on the text, now that the whole tile is
+   the target. The tile sets `overflow: hidden` (so the date band respects the
+   rounded corners), which clips an outward `outline-offset`, so the ring is
+   drawn inside the tile via box-shadow instead. */
+.event-tile:focus-within {
+  outline: none;
+  box-shadow: 0 6px 20px var(--nlnam-shadow),
+    inset 0 0 0 3px rgb(var(--color-primary-400));
+}
+
+.event-tile-link:focus-visible {
+  outline: none;
+}
+
+.event-tile-link {
+  text-decoration: none;
+}
+
+/* Nothing inside the tile is lifted above the stretched-link overlay: raising
+   an element to make its text selectable also makes it swallow the click, so
+   the host line and description were dead spots. The whole tile is a single
+   link, so everything stays under the overlay and every point navigates. */
+
+/* The "Event details" pill is decoration, not a control: it deliberately stays
+   BELOW the stretched-link overlay (no z-index) so clicks pass through to the
+   tile link rather than landing on a dead element. */
+.event-cta-row {
+  margin-bottom: 0;
+}
+
+.event-cta-row .cta-button {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Drive its hover state from the tile, since the pill itself never receives
+   the pointer event. */
+.event-tile:hover .event-cta-row .cta-button {
+  background: rgb(var(--color-primary-400));
+  box-shadow: 0 10px 24px rgba(var(--color-primary-900), 0.36);
+}
+
+.event-date {
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--nlnam-blue-dark), var(--nlnam-blue));
+  color: #fff;
+}
+
+.event-day {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.event-month {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.event-year {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.event-content {
+  flex: 1;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.event-content h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+  color: rgb(var(--color-neutral-800));
+}
+
+html.dark .event-content h3 {
+  color: rgb(var(--color-neutral-100));
+}
+
+.event-sponsor {
+  margin: 0.35rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--nlnam-red);
+}
+
+html.dark .event-sponsor {
+  color: rgb(var(--color-secondary-300));
+}
+
+.event-description {
+  margin: 0.75rem 0 0;
+  line-height: 1.6;
+  color: rgb(var(--color-neutral-600));
+}
+
+html.dark .event-description {
+  color: rgb(var(--color-neutral-300));
+}
+
+/* Previous events: compact rows with a red left rule to separate them
+   visually from the blue-accented upcoming tiles. */
+.previous-events-list {
+  margin: 1.5rem 0;
+}
+
+.previous-event-item {
+  margin-bottom: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--nlnam-panel-border);
+  border-left: 4px solid var(--nlnam-red);
+  background: var(--nlnam-panel);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.previous-event-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 14px var(--nlnam-shadow);
+}
+
+.previous-event-item a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.event-date-text {
+  min-width: 9.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--nlnam-red);
+}
+
+html.dark .event-date-text {
+  color: rgb(var(--color-secondary-300));
+}
+
+.event-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: rgb(var(--color-neutral-800));
+}
+
+html.dark .event-title {
+  color: rgb(var(--color-neutral-100));
+}
+
+/* ------------------------------------------------------------ contact form */
+.contact-form-wrapper {
+  max-width: 42rem;
+  margin: 2rem 0;
+  padding: 1.75rem;
+  border-radius: 16px;
+  border: 1px solid var(--nlnam-panel-border);
+  border-top: 5px solid var(--nlnam-blue);
+  background: var(--nlnam-panel);
+  box-shadow: 0 6px 20px var(--nlnam-shadow);
+}
+
+.nlnam-form {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.nlnam-form label {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgb(var(--color-neutral-700));
+}
+
+html.dark .nlnam-form label {
+  color: rgb(var(--color-neutral-200));
+}
+
+.nlnam-form input,
+.nlnam-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgb(var(--color-neutral-300));
+  background: rgb(var(--color-neutral));
+  color: rgb(var(--color-neutral-800));
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+html.dark .nlnam-form input,
+html.dark .nlnam-form textarea {
+  border-color: rgb(var(--color-neutral-700));
+  background: rgb(var(--color-neutral-900));
+  color: rgb(var(--color-neutral-100));
+}
+
+.nlnam-form input:focus,
+.nlnam-form textarea:focus {
+  outline: none;
+  border-color: var(--nlnam-blue);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-500), 0.2);
+}
+
+.nlnam-form textarea {
+  resize: vertical;
+}
+
+.nlnam-form button.cta-button {
+  justify-self: start;
+  margin-top: 1rem;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ------------------------------------------------------------------ mobile */
+@media (max-width: 48em) {
+  .network-automation-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .stay-connected-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .previous-event-item a {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .event-date-text {
+    min-width: 0;
+  }
+
+  /* Agenda tables get wide; let them scroll rather than blow out the page. */
+  .prose table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-button,
+  .event-tile,
+  .previous-event-item {
+    transition: none;
+  }
+
+  .cta-button:hover,
+  .event-tile:hover,
+  .previous-event-item:hover {
+    transform: none;
+  }
+}

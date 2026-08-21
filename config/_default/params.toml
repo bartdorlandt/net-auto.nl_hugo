@@ -6,9 +6,9 @@
 # https://blowfish.page/docs/configuration/#theme-parameters
 
 # colorScheme = "blowfish"
-colorScheme = "autumn"
+colorScheme = "nlnam"
 defaultAppearance = "dark" # valid options: light or dark
-autoSwitchAppearance = false
+autoSwitchAppearance = true
 
 enableA11y = false
 enableSearch = true
@@ -24,7 +24,7 @@ replyByEmail = false
 disableImageOptimization = false
 disableImageOptimizationMD = false
 disableTextInHeader = false
-# backgroundImageWidth = 1200
+backgroundImageWidth = 1200
 
 # defaultBackgroundImage = "IMAGE.jpg" # used as default for background images
 # backgroundCanvas = false # render defaultBackgroundImage as a fixed backdrop on every page
@@ -59,9 +59,9 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   # mobileMenuStyle = "fullscreen" # valid options: fullscreen, dropdown
 
 [footer]
-  showMenu = true
-  showCopyright = true
-  showThemeAttribution = true
+  showMenu = false
+  showCopyright = false
+  showThemeAttribution = false
   showAppearanceSwitcher = true
   showScrollToTop = true
 

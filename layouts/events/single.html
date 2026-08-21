@@ -1,0 +1,91 @@
+{{ define "main" }}
+  {{- /* Event page.
+
+         Overrides the generic article layout, which framed a meetup as a blog
+         post: title, byline, word count, reading time. None of that describes
+         an event. What a reader actually needs is *when*, *where*, and *how do
+         I get in* -- and on the old layout the registration link was a bullet
+         three paragraphs down.
+
+         This header answers those three questions above the fold, and marks
+         past events as past so nobody registers for a meetup that has happened.
+  */ -}}
+  {{ $past := lt .Date now }}
+  {{ $closes := "" }}
+  {{ with .Params.registrationClosesDaysBefore }}
+    {{ $closes = $.Date.AddDate 0 0 (mul -1 (int .)) }}
+  {{ end }}
+
+  <article>
+    <header class="event-header{{ if $past }} is-past{{ end }}">
+      <div class="event-header-date">
+        <span class="event-header-day">{{ .Date.Format "2" }}</span>
+        <span class="event-header-month">{{ .Date.Format "Jan" }}</span>
+        <span class="event-header-year">{{ .Date.Format "2006" }}</span>
+      </div>
+
+      <div class="event-header-body">
+        <p class="event-header-eyebrow">
+          {{ if $past }}Past meetup{{ else }}Upcoming meetup{{ end }}
+          <span class="event-header-sep">·</span>
+          {{ .Date.Format "Monday" }}
+        </p>
+
+        <h1 class="event-header-title">{{ .Title | emojify }}</h1>
+
+        <dl class="event-facts">
+          {{ with .Params.host }}
+            <div class="event-fact">
+              <dt>Host</dt>
+              <dd>{{ . }}</dd>
+            </div>
+          {{ end }}
+          {{ with .Params.venue }}
+            <div class="event-fact">
+              <dt>Venue</dt>
+              <dd>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ . | urlquery }}"
+                   target="_blank" rel="noopener">{{ . }}</a>
+              </dd>
+            </div>
+          {{ end }}
+          {{ with .Params.doorsOpen }}
+            <div class="event-fact">
+              <dt>Doors</dt>
+              <dd>
+                {{ . }}{{ with $.Params.endsAt }} &ndash; {{ . }}{{ end }}
+              </dd>
+            </div>
+          {{ end }}
+        </dl>
+
+        {{- /* Actions are hidden on past events: registration and the call for
+               papers are both closed by then, and a live-looking button that
+               leads to an expired form is worse than no button. */ -}}
+        {{ if not $past }}
+          <div class="event-actions">
+            {{ with .Params.registerURL }}
+              <a class="cta-button" href="{{ . }}" target="_blank" rel="noopener">Register</a>
+            {{ end }}
+            {{ with .Params.cfpURL }}
+              <a class="cta-button cta-button-quiet" href="{{ . }}" target="_blank" rel="noopener">Propose a talk</a>
+            {{ end }}
+          </div>
+          {{ with $closes }}
+            <p class="event-deadline">
+              Registration closes {{ .Format "2 January" }} at 23:59
+            </p>
+          {{ end }}
+        {{ end }}
+      </div>
+    </header>
+
+    <section class="prose max-w-full dark:prose-invert">
+      <div class="article-content">{{ .Content }}</div>
+    </section>
+
+    <footer class="pt-8 print:hidden">
+      {{ partial "article-pagination.html" . }}
+    </footer>
+  </article>
+{{ end }}

@@ -9,7 +9,10 @@ displayName = "EN"
 isoCode = "en"
 rtl = false
 dateFormat = "2 January 2006"
-# logo = "img/logo.png"
+# The floating header caps the logo at ~2.5rem wide, which squashes the full
+# wordmark into an unreadable smear. Use the square mark instead; the site
+# title renders as text right next to it.
+logo = "images/nlnam_logo_only.png"
 # secondaryLogo = "img/secondary-logo.png"
 # description = "My awesome website"
 # copyright = "Copy, _right?_ :thinking_face:"

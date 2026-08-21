@@ -1,0 +1,131 @@
+{{ define "main" }}
+  {{- /* Events index.
+
+         The generic Blowfish list renders one flat, date-descending stream,
+         which buries the next meetup below events that have already happened.
+         This template splits on today's date instead:
+
+           - upcoming events, soonest first, as date-badged tiles
+           - previous events, most recent first, as compact rows
+
+         The .events-container / .event-tile / .previous-event-item classes are
+         carried over from the old MkDocs site and are styled in
+         assets/css/custom.css.
+  */ -}}
+  {{ $now := now }}
+  {{ $upcoming := slice }}
+  {{ $previous := slice }}
+  {{ range .Pages }}
+    {{ if ge .Date $now }}
+      {{ $upcoming = $upcoming | append . }}
+    {{ else }}
+      {{ $previous = $previous | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $upcoming = sort $upcoming "Date" "asc" }}
+  {{ $previous = sort $previous "Date" "desc" }}
+
+  <header>
+    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title | emojify }}
+    </h1>
+  </header>
+
+  {{ with .Content }}
+    <section class="prose mb-4 mt-4 max-w-full dark:prose-invert">{{ . }}</section>
+  {{ end }}
+
+  <section class="events-sections prose max-w-full dark:prose-invert">
+    {{ with $upcoming }}
+      <h2>Upcoming events</h2>
+      <div class="events-container">
+        {{ range . }}
+          <article class="event-tile">
+            <div class="event-date">
+              <span class="event-day">{{ .Date.Format "2" }}</span>
+              <span class="event-month">{{ .Date.Format "Jan" }}</span>
+              <span class="event-year">{{ .Date.Format "2006" }}</span>
+            </div>
+            <div class="event-content">
+              {{- /* The title link is "stretched" over the whole tile by CSS, so
+                     the entire card is one click target. Kept as a single real
+                     anchor rather than wrapping the <article> -- that keeps the
+                     accessible name meaningful ("NLNAM Meetup 3 @ ...") instead
+                     of announcing the whole card, and avoids the duplicate link
+                     to the same URL that a separate button would add. */ -}}
+              <h3><a class="event-tile-link" href="{{ .RelPermalink }}">{{ .Title | emojify }}</a></h3>
+              {{- /* `host` is display copy; `description` is SEO meta text that
+                     just repeats the date and title, so it is not shown here. */ -}}
+              {{ with .Params.host }}
+                <p class="event-sponsor">{{ . }}</p>
+              {{ end }}
+              {{ with .Params.summary }}
+                <p class="event-description">{{ . }}</p>
+              {{ end }}
+              {{- /* Visual affordance only -- a <span>, not an <a>. The whole
+                     tile is already the link, so a second anchor to the same
+                     URL would duplicate the tab stop and make screen readers
+                     announce the destination twice. */ -}}
+              <p class="event-cta-row">
+                <span class="cta-button" aria-hidden="true">Event details</span>
+              </p>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    {{ else }}
+      <h2>Upcoming events</h2>
+      <p>
+        No meetup is scheduled right now. Follow the
+        <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener">LinkedIn group</a>
+        to hear about the next one first.
+      </p>
+    {{ end }}
+
+    {{ with $previous }}
+      <h2>Previous events</h2>
+      <div class="previous-events-list not-prose">
+        {{ range . }}
+          <div class="previous-event-item">
+            <a href="{{ .RelPermalink }}">
+              <span class="event-date-text">{{ .Date.Format (site.Params.dateFormat | default "2 January 2006") }}</span>
+              <span class="event-title">{{ .Title | emojify }}</span>
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{- /* Host pitch. Placed after the event history rather than between the
+           two lists: a visitor who has just scrolled past every past meetup has
+           seen the thing is real and recurring, which is the moment the ask
+           lands. Wedging it between "upcoming" and "previous" would interrupt
+           the one thing people come to this page to scan.
+
+           Deliberately only covers what NLNAM brings a host -- the reciprocal
+           "what you get" half already exists on the homepage panel, and
+           repeating it here would just be the same four bullets twice. */ -}}
+    <aside class="host-pitch not-prose">
+      <h2 class="host-pitch-title">Want to host a meetup?</h2>
+      <p class="host-pitch-lead">
+        We are always looking for companies to host. You provide the room and
+        the pizza; we bring the rest.
+      </p>
+      <ul class="host-pitch-list">
+        <li>Speakers with real network automation experience</li>
+        <li>Promotion to the community and on LinkedIn</li>
+        <li>An audience of practitioners, not recruiters</li>
+      </ul>
+      <div class="host-pitch-actions">
+        <a href="/contact/" class="cta-button">Get in touch</a>
+        <p class="host-pitch-direct">
+          Or message
+          <a href="https://www.linkedin.com/in/bartdorlandt/" target="_blank" rel="noopener">Bart</a>
+          or
+          <a href="https://www.linkedin.com/in/dpeachey/" target="_blank" rel="noopener">Dan</a>
+          directly on LinkedIn.
+        </p>
+      </div>
+    </aside>
+  </section>
+{{ end }}

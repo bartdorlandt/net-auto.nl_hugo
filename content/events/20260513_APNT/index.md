@@ -1,26 +1,24 @@
 ---
 title: NLNAM Meetup 2 @ APNT
 description: 2026-05-13 NLNAM Meetup 2
+host: "APNT"
+registerURL: "https://pretix.eu/nlnam/20260513-apnt/"
+venue: "Laan der Continenten 182, Alphen aan den Rijn"
+doorsOpen: "18:00"
+endsAt: "22:00"
 date: 2026-05-13
 publishDate: 2026-01-08
 lastmod: 2026-02-13
+# Days before the event; rendered by layouts/events/single.html.
+registrationClosesDaysBefore: 1
+cfpClosesDaysBefore: 30
 ---
 
-The next meetup is hosted by [APNT](https://apnt.nl/) on 2026-05-13.
-
 Thank you APNT for opening your doors to host us and fill our bellies with pizzas and drinks!
-
-* [Register for the event](https://pretix.eu/nlnam/20260513-apnt/)
-    * Registration ends on May 12 at 23:59.
-* [Submit a presentation proposal](https://forms.gle/qmjaMqcHLuJV3rTy8)
-    * Talks will be selected and communicated around April 13.
 
 ## Specifics
 * Parking is available
 * Train station is around the corner
-
-## Location
-{{< maps "Laan der Continenten 182, 2404 WE, Alphen aan den Rijn" >}}
 
 ## Agenda
 
