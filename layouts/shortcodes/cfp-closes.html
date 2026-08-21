@@ -1,0 +1,3 @@
+{{- /* Call-for-papers close date: page date minus cfpClosesDaysBefore. */ -}}
+{{- $days := int (default 30 .Page.Params.cfpClosesDaysBefore) -}}
+{{- (.Page.Date.AddDate 0 0 (mul -1 $days)).Format "January 2" -}}

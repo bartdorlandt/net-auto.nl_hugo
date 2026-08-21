@@ -1,0 +1,4 @@
+{{- /* Registration close date, derived from the page date minus
+       registrationClosesDaysBefore. Replaces the get_older_date() macro. */ -}}
+{{- $days := int (default 1 .Page.Params.registrationClosesDaysBefore) -}}
+{{- (.Page.Date.AddDate 0 0 (mul -1 $days)).Format "January 2" -}}

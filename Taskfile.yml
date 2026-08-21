@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  init:
+    desc: Install hugo and initialize the theme submodule
+    cmds:
+      - task: init:hugo
+      - task: init:git
+
+  init:hugo:
+    internal: true
+    platforms: [darwin]
+    status:
+      - test -f /opt/homebrew/bin/hugo
+    cmds:
+      - brew install hugo
+
+  init:git:
+    internal: true
+    status:
+      - test -d themes/hugo-profile/layouts
+    cmds:
+      - git submodule update --init --recursive
+
+  update:
+    aliases: [git:update]
+    desc: Pull the repo including submodules
+    cmds:
+      # - git pull --recurse-submodules=yes
+      - git submodule update --remote --merge
+
+  build:
+    desc: Build the site into public/
+    cmds:
+      - hugo --gc
+
+  build:strict:
+    desc: Build and fail on any warning (equivalent of the old mkdocs --strict)
+    cmds:
+      - hugo --gc --printPathWarnings --panicOnWarning
+
+  serve:
+    desc: Serve the site locally on http://localhost:1313/
+    cmds:
+      - open http://localhost:1313/
+      - hugo serve --buildDrafts --buildFuture
+
+  event:new:
+    desc: "Create a new event page. Usage: task event:new NAME=20270210_Some_Sponsor"
+    requires:
+      vars: [NAME]
+    cmds:
+      - hugo new content events/{{.NAME}}/index.md --kind event
+      - mkdir -p content/events/{{.NAME}}/images
+      - echo "Created content/events/{{.NAME}}/index.md - set 'date' to the event day and drop 'draft'."

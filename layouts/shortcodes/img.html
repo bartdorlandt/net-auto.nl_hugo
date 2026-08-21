@@ -1,0 +1,31 @@
+{{- /* Responsive image via Hugo Pipes. Resizes, re-encodes and fingerprints at
+       build time so the repo can keep full-resolution sources in assets/.
+
+       src    - path under assets/ (e.g. images/presentation1.jpeg)
+       alt    - alt text (required)
+       width  - max rendered width in px (default 1200); the 2x variant is
+                capped at the source width so we never upscale
+       class  - optional CSS class
+       style  - optional inline style
+       sizes  - optional sizes attribute
+       format - override output format, e.g. "jpg" for photo-like PNGs */ -}}
+{{- $src := .Get "src" -}}
+{{- $r := resources.Get $src -}}
+{{- with $r -}}
+  {{- $w := int (default 1200 ($.Get "width")) -}}
+  {{- $w1 := cond (gt $w .Width) .Width $w -}}
+  {{- $w2 := cond (gt (mul $w1 2) .Width) .Width (mul $w1 2) -}}
+  {{- $fmt := default (cond (eq .MediaType.SubType "png") "png" "jpg") ($.Get "format") -}}
+  {{- if ne $fmt "png" }}{{ $fmt = printf "%s q82" $fmt }}{{ end -}}
+  {{- $x1 := .Resize (printf "%dx %s" $w1 $fmt) -}}
+  {{- $x2 := .Resize (printf "%dx %s" $w2 $fmt) -}}
+  <img src="{{ $x1.RelPermalink }}"
+    {{- if ne $w1 $w2 }} srcset="{{ $x1.RelPermalink }} 1x, {{ $x2.RelPermalink }} 2x"{{ end }}
+    width="{{ $x1.Width }}" height="{{ $x1.Height }}"
+    alt="{{ $.Get `alt` }}" loading="lazy" decoding="async"
+    {{- with $.Get "sizes" }} sizes="{{ . }}"{{ end }}
+    {{- with $.Get "class" }} class="{{ . }}"{{ end }}
+    {{- with $.Get "style" }} style="{{ . | safeCSS }}"{{ end }}>
+{{- else -}}
+  {{- errorf "img shortcode: asset not found: %q (called from %s)" $src $.Position -}}
+{{- end -}}

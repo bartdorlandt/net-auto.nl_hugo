@@ -1,0 +1,7 @@
+{{- /* Material-style admonition. Type is a CSS modifier: automation, network, note, tip. */ -}}
+{{- $type := default "note" (.Get "type") -}}
+{{- $title := default (title $type) (.Get "title") -}}
+<div class="admonition {{ $type }}">
+  <p class="admonition-title">{{ $title }}</p>
+  {{ .Inner | markdownify }}
+</div>
