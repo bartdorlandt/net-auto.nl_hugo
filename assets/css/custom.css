@@ -392,6 +392,70 @@ html.dark .admonition.tip .admonition-title {
   color: rgb(110, 231, 183);
 }
 
+/* ------------------------------------------------- mobile menu (iOS fix)
+ * The floating header carries `backdrop-filter: blur(24px)`. Per spec, a
+ * backdrop-filter establishes a containing block for `position: fixed`
+ * descendants, so the fullscreen mobile menu -- which the theme positions with
+ * `fixed inset-0` -- sized itself to the ~160px header bar instead of the
+ * viewport, showing only the first slice of the menu. Safari/iOS honours this
+ * strictly; some engines are laxer, which is why it looks fine on desktop.
+ *
+ * Fix: pin the dialog to the viewport with explicit units rather than relying
+ * on `inset-0` resolving against the initial containing block. `100dvh` tracks
+ * the dynamic viewport so the panel is not cut off by mobile Safari's
+ * collapsing address bar.
+ */
+#mobile-menu-dialog {
+  /* Positioned relative to the blurred header wrapper rather than the viewport
+     (see above), so offsets are cancelled explicitly: the wrapper sits inset by
+     the header's own `top-3 px-3` / `sm:top-5 sm:px-6`, and negative margins of
+     the same size pull the panel back to the true viewport corner. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: auto;
+  /* The extra 1px is the wrapper's own border, which also shifts the origin. */
+  margin-top: calc(-1 * (var(--nlnam-header-inset-y) + 1px));
+  margin-left: calc(-1 * (var(--nlnam-header-inset-x) + 1px));
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  /* Clear the notch / home indicator on iPhone. */
+  padding-top: max(5rem, env(safe-area-inset-top) + 4rem);
+  padding-bottom: max(2rem, env(safe-area-inset-bottom) + 1rem);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Matches the theme's `top-3 px-3` on the floating header wrapper, and its
+   `sm:top-5 sm:px-6` at the small breakpoint. */
+:root {
+  --nlnam-header-inset-y: 0.75rem;
+  --nlnam-header-inset-x: 0.75rem;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --nlnam-header-inset-y: 1.25rem;
+    --nlnam-header-inset-x: 1.5rem;
+  }
+}
+
+/* The close button is `fixed` too, so it inherits the same containing block. */
+#mobile-menu-dialog > label[for="mobile-menu-toggle"] {
+  position: absolute;
+  top: max(1.25rem, env(safe-area-inset-top) + 0.5rem);
+  inset-inline-end: max(1.5rem, env(safe-area-inset-right) + 1rem);
+}
+
+/* While the menu is open, stop the page behind it from scrolling. */
+#mobile-menu-toggle:checked ~ #mobile-menu-dialog {
+  overscroll-behavior: contain;
+}
+
 /* ----------------------------------------------------------------- about
  * Banner photo plus organiser cards.
  */
