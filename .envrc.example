@@ -1,0 +1,4 @@
+# Pretix API token with permission to create and edit events under the
+# "nlnam" organizer. Create one at:
+#   https://pretix.eu/control/organizer/nlnam/teams/
+export PRETIX_API_TOKEN=changeme
