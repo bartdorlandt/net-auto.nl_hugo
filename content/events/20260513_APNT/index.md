@@ -2,6 +2,9 @@
 title: NLNAM Meetup 2 @ APNT
 description: "Network automation meetup hosted by APNT in Alphen aan den Rijn on 13 May 2026. Free to attend: talks, pizza and networking."
 host: "APNT"
+hostURL: "https://www.apnt.nl/"
+eventNumber: 2
+pretixSlug: "20260513-apnt"
 registerURL: "https://pretix.eu/nlnam/20260513-apnt/"
 venue: "Laan der Continenten 182, Alphen aan den Rijn"
 doorsOpen: "18:00"

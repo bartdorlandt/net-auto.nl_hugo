@@ -51,11 +51,51 @@ tasks:
       - open http://localhost:1313/
       - hugo serve --buildDrafts --buildFuture
 
-  event:new:
-    desc: "Create a new event page. Usage: task event:new NAME=20270210_Some_Sponsor"
-    requires:
-      vars: [NAME]
+  ### Events
+  event:
+    desc: "Full flow for a new event: page, pretix event, reminders"
+    aliases: [new, post]
+    interactive: true
+    silent: true
     cmds:
-      - hugo new content events/{{.NAME}}/index.md --kind event
-      - mkdir -p content/events/{{.NAME}}/images
-      - echo "Created content/events/{{.NAME}}/index.md - set 'date' to the event day and drop 'draft'."
+      - task: event:page
+      - |
+        echo
+        echo "Page written. Edit it now if you want, then continue."
+        echo "Date of the event you just created (YYYYMMDD):"
+        read event_date
+        task event:pretix DATE=$event_date
+        task reminders DATE=$event_date
+
+  event:page:
+    desc: "Create the event page. Prompts for date, sponsor, website and address."
+    aliases: [event:new]
+    interactive: true
+    cmds:
+      - ./scripts/new_event.py {{.CLI_ARGS}}
+
+  event:list:
+    desc: List all events with their number, pretix slug and host
+    silent: true
+    cmds:
+      - ./scripts/list_events.py
+
+  event:pretix:
+    desc: "Create the event in pretix by cloning a previous one. Usage: task event:pretix DATE=20270210"
+    silent: true
+    prompt:
+      - This will create a live event in pretix. Do you want to continue?
+    cmds:
+      - ./scripts/create_pretix_event.py {{if .DATE}}--date {{.DATE}}{{end}} {{.CLI_ARGS}}
+
+  event:pretix:dry:
+    desc: "Show what would be sent to pretix, without creating anything. Usage: task event:pretix:dry DATE=20270210"
+    silent: true
+    cmds:
+      - ./scripts/create_pretix_event.py {{if .DATE}}--date {{.DATE}}{{end}} --dry-run
+
+  reminders:
+    desc: "Generate LinkedIn posts and the posting schedule. Usage: task reminders [DATE=20270210]"
+    silent: true
+    cmds:
+      - ./scripts/reminders.py {{if .DATE}}--date {{.DATE}}{{end}}
