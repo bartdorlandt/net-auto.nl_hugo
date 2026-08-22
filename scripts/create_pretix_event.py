@@ -14,7 +14,7 @@ Copies all settings from a source event and changes name, slug, dates and
 location. Then creates vouchers for the internal and speaker tickets and makes
 the event live.
 
-Ported from the mkdocs repo's create_event.py. The one behavioural change: event
+Ported from the mkdocs repo's create_event.py. The one behavioral change: event
 details come from the Hugo page front matter (content/events/<date>_<Sponsor>/
 index.md) rather than events.yaml, so the website and the ticket shop cannot
 disagree about the date, venue or name.
@@ -32,10 +32,10 @@ from datetime import datetime, timedelta
 from enum import StrEnum
 from typing import Any
 
-import click
+import click  # pyright: ignore[reportMissingImports]
 import events as ev
-import httpx
-from environs import env
+import httpx  # pyright: ignore[reportMissingImports]
+from environs import env  # pyright: ignore[reportMissingImports]
 
 env.read_env()
 
