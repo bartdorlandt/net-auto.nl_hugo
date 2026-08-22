@@ -1,6 +1,6 @@
 ---
 title: NLNAM Meetup 1 @ Adyen with Netpicker
-description: 2026-02-05 NLNAM Meetup event
+description: "Network automation meetup hosted by Adyen in Amsterdam on 5 February 2026. Free to attend: talks, pizza and networking."
 host: "Adyen, sponsored by Netpicker / Slurpit"
 registerURL: "https://nlnam_adyen_netpicker.eventbrite.nl/"
 venue: "Rokin 49, Amsterdam"

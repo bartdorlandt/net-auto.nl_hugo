@@ -1,6 +1,6 @@
 ---
 title: NLNAM Meetup 3 @ One Zero IT
-description: 2026-09-09 NLNAM Meetup 3
+description: "Network automation meetup hosted by One Zero IT in Utrecht on 9 September 2026. Free to attend: talks, pizza and networking."
 host: "One Zero IT"
 registerURL: "https://pretix.eu/nlnam/20260909-onezeroit/"
 venue: "Van Deventerlaan 30-40, Utrecht"

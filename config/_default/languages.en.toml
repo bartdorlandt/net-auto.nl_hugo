@@ -14,7 +14,7 @@ dateFormat = "2 January 2006"
 # title renders as text right next to it.
 logo = "images/nlnam_logo_only.png"
 # secondaryLogo = "img/secondary-logo.png"
-# description = "My awesome website"
+description = "The Netherlands Network Automation Meetup (NLNAM): a free, volunteer-run meetup for network engineers, developers and automation practitioners in the Netherlands."
 # copyright = "Copy, _right?_ :thinking_face:"
 
 # [params.author]

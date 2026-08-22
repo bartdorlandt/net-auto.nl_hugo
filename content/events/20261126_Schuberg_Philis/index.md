@@ -1,6 +1,6 @@
 ---
 title: NLNAM Meetup 4 @ Schuberg Philis
-description: 2026-11-26 NLNAM Meetup 4
+description: "Network automation meetup hosted by Schuberg Philis in Schiphol-Rijk on 26 November 2026. Free to attend: talks, buffet and networking."
 host: "Schuberg Philis"
 registerURL: "https://pretix.eu/nlnam/20261126-schubergphilis/"
 venue: "Boeingavenue 271, Schiphol-Rijk"
