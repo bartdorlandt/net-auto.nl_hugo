@@ -1,0 +1,19 @@
+{{- /* Overrides the theme's default icon block (themes/blowfish/layouts/
+       partials/head.html). Adds two things the default omits:
+
+       1. `rel="icon"` pointing at favicon.ico. The file was generated but
+          nothing referenced it, so browsers that prefer .ico -- and iOS
+          Chrome, which does not always honour the sized PNG links -- had
+          nothing to fall back to.
+       2. An explicit 192px `rel="icon"`. iOS Chrome picks an icon by size and
+          will happily scale a 16px PNG up into a blurry mess if that is the
+          best match it finds; giving it a large one avoids that.
+
+       Order matters: browsers generally take the last matching link, so the
+       largest is listed last. */ -}}
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ "android-chrome-192x192.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
