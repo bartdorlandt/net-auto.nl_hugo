@@ -1,0 +1,24 @@
+{{- /* Project override: force summary_large_image when a wide social image exists.
+       Hugo's built-in template only upgrades the card when the page itself carries
+       an image resource, so a site-wide defaultSocialImage would otherwise render
+       as a small "summary" thumbnail. */ -}}
+{{- $img := "" -}}
+{{- $pageImages := .Resources.ByType "image" -}}
+{{- range slice "*featured*" "*cover*" "*thumbnail*" -}}
+  {{- if not $img -}}{{- $img = $pageImages.GetMatch . -}}{{- end -}}
+{{- end -}}
+{{- if not $img -}}
+  {{- with .Site.Params.defaultSocialImage -}}
+    {{- if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") -}}
+      {{- $img = resources.GetRemote . -}}
+    {{- else -}}
+      {{- $img = resources.Get . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<meta name="twitter:card" content="{{ if $img }}summary_large_image{{ else }}summary{{ end }}">
+{{- with .Site.Params.author.twitter }}
+<meta name="twitter:site" content="@{{ . }}">
+{{- end }}
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }} ">

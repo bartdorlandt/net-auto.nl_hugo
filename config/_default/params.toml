@@ -29,7 +29,7 @@ backgroundImageWidth = 1200
 # defaultBackgroundImage = "IMAGE.jpg" # used as default for background images
 # backgroundCanvas = false # render defaultBackgroundImage as a fixed backdrop on every page
 # defaultFeaturedImage = "IMAGE.jpg" # used as default for featured images in all articles
-defaultSocialImage = "images/nlnam_logo_with_bg.png" # used as default for social media sharing (Open Graph and Twitter)
+defaultSocialImage = "images/nlnam_og.png" # used as default for social media sharing (Open Graph and Twitter)
 hotlinkFeatureImage = false
 # Thumbnail aspect ratio as a number (e.g., "1.5", "1.0", "1.777")
 # thumbnailAspectRatio = "1.5"
