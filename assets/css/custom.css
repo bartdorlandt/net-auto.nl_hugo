@@ -1022,6 +1022,18 @@ html.dark .cta-button-quiet:hover {
   color: var(--nlnam-blue);
 }
 
+/* Squeeze the time column down to its content so the activity column absorbs
+ * the remaining width instead of leaving dead space on the right. */
+.prose thead th:first-child,
+.prose tbody td:first-child {
+  width: 1%;
+}
+
+.prose thead th:last-child,
+.prose tbody td:last-child {
+  width: auto;
+}
+
 html.dark .prose tbody td:first-child {
   color: rgb(var(--color-primary-300));
 }
