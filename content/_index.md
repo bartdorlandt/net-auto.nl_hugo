@@ -1,5 +1,5 @@
 ---
-title: "🌐 Welcome to NL Network Automation Meetup"
+title: "Welcome to NL Network Automation Meetup"
 # heroLead: "Connecting Network Automation Professionals in the Netherlands"
 # The body card below already carries these CTAs; suppress the hero copy
 # of them so the same two links do not appear twice. See
@@ -11,14 +11,14 @@ heroButtons:
   - label: "🤝 Join Us on LinkedIn"
     url: "https://www.linkedin.com/groups/15393055/"
 
-description: "The Netherlands Network Automation Meetup (NLNAM) - a community of network engineers, DevOps practitioners and automation enthusiasts modernizing network infrastructure through code."
+description: "The Netherlands Network Automation Meetup (NLNAM) - a community of network engineers, DevOps practitioners and automation enthusiasts automating network infrastructure."
 ---
 
 <div class="network-automation-card">
   <h2 style="margin-top: 0;">Connecting Network Automation Professionals in the Netherlands</h2>
   <div class="hero-card-grid">
     <div class="hero-card-copy">
-      <p>The Netherlands Network Automation Meetup (NLNAM) is a vibrant community of network engineers, DevOps practitioners, automation enthusiasts and software developers who are passionate about modernizing network infrastructure through code.</p>
+      <p>The Netherlands Network Automation Meetup (NLNAM) is a vibrant community of network engineers, DevOps practitioners, automation enthusiasts and software developers who are passionate about automating network infrastructure.</p>
       <p class="hero-card-actions">
         <a href="/events/" class="cta-button">📅 Upcoming Events</a>
         <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener" class="cta-button">🤝 Join Us on LinkedIn</a>
