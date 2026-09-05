@@ -28,10 +28,11 @@ Thank you One Zero IT for opening your doors to host us and fill our bellies wit
 | Time  | Activity                                                                                                                                  |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | 18:00 | Doors open                                                                                                                                |
-| 18:25 | Zero Trust Automation: From Complexity to Control [(One Zero IT](http://onezeroit.nl/))                                                   |
-| 19:00 | Lightning talk: NAF framework overview ([Bart Dorlandt](https://www.linkedin.com/in/bartdorlandt/))                                       |
-| 19:15 | Break + Pizza 🍕                                                                                                                           |
-| 20:00 | Using JSON schema to describe your data model and perform validation ([Sander van Delden](https://www.linkedin.com/in/sander-van-delden)) |
-| 20:30 | Manage a pan-european network with WFO and Ansible ([Simone Spinelli](https://www.linkedin.com/in/simone-spinelli/))                      |
-| 21:00 | Closing words + networking                                                                                                                |
+| 18:30 | Kick off                                                                                                                                  |
+| 18:40 | Zero Trust Automation: From Complexity to Control ([One Zero IT](http://onezeroit.nl/))                                                   |
+| 19:10 | Lightning talk: NAF framework overview ([Bart Dorlandt](https://www.linkedin.com/in/bartdorlandt/))                                       |
+| 19:25 | Break + Pizza 🍕                                                                                                                           |
+| 20:10 | Using JSON schema to describe your data model and perform validation ([Sander van Delden](https://www.linkedin.com/in/sander-van-delden)) |
+| 20:40 | Manage a pan-european network with WFO and Ansible ([Simone Spinelli](https://www.linkedin.com/in/simone-spinelli/))                      |
+| 21:10 | Closing words + networking                                                                                                                |
 | ...   | Venue closing                                                                                                                             |
