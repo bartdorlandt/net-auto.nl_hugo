@@ -31,6 +31,7 @@ import string
 from datetime import datetime, timedelta
 from enum import StrEnum
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import click  # pyright: ignore[reportMissingImports]
 import events as ev
@@ -42,9 +43,10 @@ env.read_env()
 ORGANIZER = ev.PRETIX_ORGANIZER
 API_BASE_URL = f"{ev.PRETIX_BASE_URL}/api/v1/organizers/{ORGANIZER}/events"
 CONTROL_URL = f"{ev.PRETIX_BASE_URL}/control/event/{ORGANIZER}"
-DEFAULT_SOURCE_EVENT = "20260909-onezeroit"
-SPEAKER_TICKET_AMOUNT = 3
-INTERNAL_TICKET_AMOUNT = 10
+DEFAULT_SOURCE_EVENT = "20261126-schubergphilis"
+EVENT_TZ = ZoneInfo("Europe/Amsterdam")
+SPEAKER_TICKET_AMOUNT = 6
+INTERNAL_TICKET_AMOUNT = 20
 
 
 class TicketType(StrEnum):
@@ -67,7 +69,9 @@ def make_client() -> httpx.Client:
 def event_payload(event: ev.Event, doors_open: str | None) -> dict[str, Any]:
     """Build the pretix clone payload from the Hugo page front matter."""
     hhmm = doors_open or event.doors_open
-    date_admission = datetime.strptime(f"{event.date_compact}{hhmm}", "%Y%m%d%H%M")
+    date_admission = datetime.strptime(
+        f"{event.date_compact}{hhmm}", "%Y%m%d%H%M"
+    ).replace(tzinfo=EVENT_TZ)
 
     return {
         "name": {"en": f"NLNAM {event.event_number} @ {event.host}"},
@@ -79,7 +83,7 @@ def event_payload(event: ev.Event, doors_open: str | None) -> dict[str, Any]:
         "date_to": str(date_admission + timedelta(hours=4)),
         "date_admission": str(date_admission),
         "presale_start": str(
-            datetime.now().replace(hour=9, minute=0, second=0, microsecond=0)
+            datetime.now(tz=EVENT_TZ).replace(hour=9, minute=0, second=0, microsecond=0)
             + timedelta(days=7)
         ),
         "presale_end": str(
@@ -179,4 +183,4 @@ def main(date: str, doors_open: str | None, source_event: str, dry_run: bool) ->
 
 
 if __name__ == "__main__":
-    main()
+    main()  # pyright: ignore[reportCallIssue]  # Click supplies the parameters.
