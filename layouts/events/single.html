@@ -10,7 +10,8 @@
          This header answers those three questions above the fold, and marks
          past events as past so nobody registers for a meetup that has happened.
   */ -}}
-  {{ $past := lt .Date now }}
+  {{/* Past only once the event day is fully over: .Date is midnight, so add a day. */}}
+  {{ $past := lt (.Date.AddDate 0 0 1) now }}
   {{ $closes := "" }}
   {{ with .Params.registrationClosesDaysBefore }}
     {{ $closes = $.Date.AddDate 0 0 (mul -1 (int .)) }}

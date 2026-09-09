@@ -36,3 +36,6 @@ Thank you One Zero IT for opening your doors to host us and fill our bellies wit
 | 20:40 | Manage a pan-european network with WFO and Ansible ([Simone Spinelli](https://www.linkedin.com/in/simone-spinelli/))                      |
 | 21:10 | Closing words + networking                                                                                                                |
 | ...   | Venue closing                                                                                                                             |
+
+## Presentations & Photos
+[Presentations and Photos](https://drive.google.com/open?id=1IYehbk2Ko7Wwa0cDavVKEuNr2O1e6lKI&usp=drive_fs)

@@ -47,6 +47,8 @@ tasks:
 
   serve:
     desc: Serve the site locally on http://localhost:1313/
+    aliases:
+      - present
     cmds:
       - open http://localhost:1313/
       - hugo serve --buildDrafts --buildFuture

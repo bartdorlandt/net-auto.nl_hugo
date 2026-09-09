@@ -16,7 +16,9 @@
   {{ $upcoming := slice }}
   {{ $previous := slice }}
   {{ range .Pages }}
-    {{ if ge .Date $now }}
+    {{/* An event stays "upcoming" for the whole of its own day: compare against
+         the start of the day after .Date, not .Date itself (which is midnight). */}}
+    {{ if ge (.Date.AddDate 0 0 1) $now }}
       {{ $upcoming = $upcoming | append . }}
     {{ else }}
       {{ $previous = $previous | append . }}
