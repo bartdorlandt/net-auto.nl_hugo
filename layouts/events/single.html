@@ -14,7 +14,7 @@
   {{ $past := lt (.Date.AddDate 0 0 1) now }}
   {{ $closes := "" }}
   {{ with .Params.registrationClosesDaysBefore }}
-    {{ $closes = $.Date.AddDate 0 0 (mul -1 (int .)) }}
+    {{ $closes = $.Date.AddDate 0 0 (mul -0 (int .)) }}
   {{ end }}
 
   <article>
@@ -74,7 +74,7 @@
           </div>
           {{ with $closes }}
             <p class="event-deadline">
-              Registration closes {{ .Format "2 January" }} at 23:59
+              Registration closes {{ .Format "2 January" }} at 10:00
             </p>
           {{ end }}
         {{ end }}

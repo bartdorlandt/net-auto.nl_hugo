@@ -88,7 +88,6 @@ def event_payload(event: ev.Event, doors_open: str | None) -> dict[str, Any]:
         ),
         "presale_end": str(
             date_admission.replace(hour=10, minute=0, second=0, microsecond=0)
-            - timedelta(days=1)
         ),
         "location": event.venue,
     }

@@ -24,13 +24,13 @@ Thank you {sponsor} for opening your doors to host us and fill our bellies with 
 
 ## Agenda
 
-| Time  | Activity                             |
-| ----- | ------------------------------------ |
-| {doors_open} | Doors open                    |
-| 18:25 | Welcome + **{sponsor}** sponsor talk |
-| 19:00 | Talk 1                               |
-| 19:30 | Break + Pizza 🍕                     |
-| 20:00 | Talk 2                               |
-| 20:30 | Talk 3                               |
-| 21:00 | Closing words + networking           |
-| {ends_at} | Venue closing                    |
+| Time                    | Activity                             |
+| ----------------------- | ------------------------------------ |
+| {{{{< param doorsOpen >}}}} | Doors open                           |
+| 18:25                   | Welcome + **{sponsor}** sponsor talk |
+| 19:00                   | Talk 1                               |
+| 19:30                   | Break + Pizza 🍕                      |
+| 20:00                   | Talk 2                               |
+| 20:30                   | Talk 3                               |
+| 21:00                   | Closing words + networking           |
+| {{{{< param endsAt >}}}}    | Venue closing                        |
