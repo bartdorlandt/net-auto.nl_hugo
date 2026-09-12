@@ -4,6 +4,7 @@
 # dependencies = [
 #     "click>=8.2.1",
 #     "environs>=14.6.0",
+#     "python-dateutil>=2.9.0",
 #     "httpx>=0.28.1",
 #     "pyyaml>=6.0.2",
 # ]
@@ -36,6 +37,7 @@ from zoneinfo import ZoneInfo
 import click  # pyright: ignore[reportMissingImports]
 import events as ev
 import httpx  # pyright: ignore[reportMissingImports]
+from dateutil.relativedelta import relativedelta  # pyright: ignore[reportMissingImports]
 from environs import env  # pyright: ignore[reportMissingImports]
 
 env.read_env()
@@ -73,18 +75,22 @@ def event_payload(event: ev.Event, doors_open: str | None) -> dict[str, Any]:
         f"{event.date_compact}{hhmm}", "%Y%m%d%H%M"
     ).replace(tzinfo=EVENT_TZ)
 
+    date_from = date_admission + timedelta(minutes=30)
+
     return {
         "name": {"en": f"NLNAM {event.event_number} @ {event.host}"},
         "slug": event.slug,
         "is_public": True,
         "testmode": False,
         # Doors open, then the programme starts 35 minutes later.
-        "date_from": str(date_admission + timedelta(minutes=30)),
+        "date_from": str(date_from),
         "date_to": str(date_admission + timedelta(hours=4)),
         "date_admission": str(date_admission),
+        # Presale opens at 09:00, three months ahead of the programme start.
         "presale_start": str(
-            datetime.now(tz=EVENT_TZ).replace(hour=9, minute=0, second=0, microsecond=0)
-            + timedelta(days=7)
+            (date_from - relativedelta(months=3)).replace(
+                hour=9, minute=0, second=0, microsecond=0
+            )
         ),
         "presale_end": str(
             date_admission.replace(hour=10, minute=0, second=0, microsecond=0)
