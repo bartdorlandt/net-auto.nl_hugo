@@ -24,12 +24,16 @@ Thank you Schuberg Philis for opening your doors to host us and fill our bellies
 
 ## Agenda
 
-| Time  | Activity                                   |
-| ----- | ------------------------------------------ |
-| 17:30 | Doors open and awesome buffet              |
-| 18:30 | Welcome + **Schuberg Philis** sponsor talk |
-| 19:15 | Talk 1                                     |
-| 19:45 | Talk 2                                     |
-| 20:15 | Break                                      |
-| 20:30 | Talk 3                                     |
-| 21:00 | Closing words + networking                 |
+| Time  | Activity                                                                                                                                                                         |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 17:30 | Doors open and awesome buffet                                                                                                                                                    |
+| 18:25 | Welcome @ Shuberg Philis                                                                                                                                                         |
+| 18:30 | **Building an open-source mission critical network monitoring and observability stack from scratch** by [Niels Goldewijk](https://www.linkedin.com/in/niels-goldewijk-b0589495/) |
+| 19:15 | **What’s Next for Nornir: Update about the Project and the Roadmap** by [Wim van Deun](https://www.linkedin.com/in/wim-van-deun/)                                                |
+| 19:45 | **Your Network Is a Prompt: Attacking and Defending AI Agents in NetOps** by [Eduard Dulharu](https://www.linkedin.com/in/eduard-dulharu/)                                       |
+| 20:15 | Break                                                                                                                                                                            |
+| 20:30 | **AI in Critical (network) infrastructure** by [Mathijs van der Maas](https://www.linkedin.com/in/mathijsvdmaas/)                                                                |
+| 21:00 | Closing words + networking                                                                                                                                                       |
+
+<!-- ## Presentations & Photos
+[Presentations and Photos](https://drive.google.com/open?id=1IYehbk2Ko7Wwa0cDavVKEuNr2O1e6lKI&usp=drive_fs) -->
