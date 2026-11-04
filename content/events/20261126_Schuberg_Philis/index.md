@@ -8,7 +8,7 @@ pretixSlug: "20261126-schubergphilis"
 registerURL: "https://pretix.eu/nlnam/20261126-schubergphilis/"
 venue: "Boeingavenue 271, Schiphol-Rijk"
 doorsOpen: "17:30"
-endsAt: "23:00"
+endsAt: "22:00"
 date: 2026-11-26
 publishDate: 2026-07-23
 lastmod: 2026-07-23
