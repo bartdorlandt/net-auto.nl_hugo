@@ -9,3 +9,4 @@
 .venv/
 __pycache__/
 /reminders/
+/checkin_list/

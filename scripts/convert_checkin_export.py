@@ -7,6 +7,12 @@
 # ///
 """Trim a pretix check-in export down to the columns the door needs.
 
+Pretix:
+- Orders > Export > Check-in list
+- Format CSV (with semicolons)
+- Check-in status: All attendees
+- sort by: Attendee name
+
 The export carries thirty-odd columns, most of them empty. Printing it or
 pulling it into a check-in list means scrolling past price, seat zone and
 address to find a name. This keeps only the order code, the name (whole, given
