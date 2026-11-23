@@ -69,7 +69,9 @@ def convert(source: Path, target: Path) -> int:
 )
 def main(source: Path, output: Path | None) -> None:
     """Reduce a pretix check-in export to the check-in columns."""
-    target = output or source.with_name(f"{source.stem}_trimmed{source.suffix}")
+    target = output or source.with_name(
+        f"{source.stem.split('_')[0]}_list{source.suffix}"
+    )
     if target == source:
         raise click.ClickException("Refusing to overwrite the input file.")
 
