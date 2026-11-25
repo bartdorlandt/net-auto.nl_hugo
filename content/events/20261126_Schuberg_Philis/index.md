@@ -27,7 +27,7 @@ Thank you Schuberg Philis for opening your doors to host us and fill our bellies
 | Time  | Activity                                                                                                                                                                         |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 17:30 | Doors open and awesome buffet                                                                                                                                                    |
-| 18:25 | Welcome @ Shuberg Philis                                                                                                                                                         |
+| 18:25 | Welcome @ Schuberg Philis                                                                                                                                                        |
 | 18:30 | **Building an open-source mission critical network monitoring and observability stack from scratch** by [Niels Goldewijk](https://www.linkedin.com/in/niels-goldewijk-b0589495/) |
 | 19:15 | **What’s Next for Nornir: Update about the Project and the Roadmap** by [Wim van Deun](https://www.linkedin.com/in/wim-van-deun/)                                                |
 | 19:45 | **Your Network Is a Prompt: Attacking and Defending AI Agents in NetOps** by [Eduard Dulharu](https://www.linkedin.com/in/eduard-dulharu/)                                       |
