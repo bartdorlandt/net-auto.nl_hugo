@@ -20,8 +20,9 @@ description: "The Netherlands Network Automation Meetup (NLNAM) - a community of
     <div class="hero-card-copy">
       <p>The Netherlands Network Automation Meetup (NLNAM) is a vibrant community of network engineers, DevOps practitioners, automation enthusiasts and software developers who are passionate about automating network infrastructure.</p>
       <p class="hero-card-actions">
-        <a href="/events/" class="cta-button">📅 Upcoming Events</a>
-        <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener" class="cta-button">🤝 Join Us on LinkedIn</a>
+        <a href="/events/" class="cta-button">📅 Events</a>
+        <a href="https://join.slack.com/t/dreamnetworking/shared_invite/zt-4hymn0dw5-qu4nh7gqyjCemOpVYt5K_g" target="_blank" rel="noopener" class="cta-button">💬 Slack</a>
+        <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener" class="cta-button">🤝 LinkedIn</a>
       </p>
     </div>
     {{< img src="images/nlnam_logo_transparent.png" alt="NL Network Automation Meetup logo" width="420" class="hero-logo" >}}
@@ -102,6 +103,7 @@ Join our community and stay updated on the latest in network automation:
 <div class="stay-connected-buttons">
   <a href="https://www.linkedin.com/groups/15393055/" target="_blank" rel="noopener" class="cta-button">💼 LinkedIn</a>
   <a href="/events/" class="cta-button">📅 Events</a>
+  <a href="https://join.slack.com/t/dreamnetworking/shared_invite/zt-4hymn0dw5-qu4nh7gqyjCemOpVYt5K_g" target="_blank" rel="noopener" class="cta-button">💬 Slack</a>
   <a href="/events/index.xml" class="cta-button">📡 RSS Feed</a>
 </div>
 
