@@ -35,5 +35,5 @@ Thank you Schuberg Philis for opening your doors to host us and fill our bellies
 | 20:30 | **AI in Critical (network) infrastructure** by [Mathijs van der Maas](https://www.linkedin.com/in/mathijsvdmaas/)                                                                |
 | 21:00 | Closing words + networking                                                                                                                                                       |
 
-<!-- ## Presentations & Photos
-[Presentations and Photos](https://drive.google.com/open?id=1IYehbk2Ko7Wwa0cDavVKEuNr2O1e6lKI&usp=drive_fs) -->
+## Presentations & Photos
+[Presentations and Photos](https://drive.google.com/drive/folders/1R2cjIz_HjrQnFbv8l8cnHBG1csElpPZJ?usp=drive_link)
