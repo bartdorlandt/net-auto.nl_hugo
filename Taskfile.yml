@@ -51,7 +51,7 @@ tasks:
       - present
     cmds:
       - open http://localhost:1313/
-      - hugo serve --buildDrafts --buildFuture
+      - hugo serve --buildDrafts --buildFuture -w
 
   ### Events
   event:

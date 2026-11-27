@@ -11,6 +11,13 @@ showTableOfContents: false
 
 Want to host a meetup, sponsor, speak, or just say hello? Send us a message.
 
+Prefer chat? Join the community on Slack.
+
+<div class="slack-qr">
+<a href="https://join.slack.com/t/dreamnetworking/shared_invite/zt-4hymn0dw5-qu4nh7gqyjCemOpVYt5K_g" target="_blank" rel="noopener" class="cta-button">💬 Join our Slack</a>
+{{< img src="images/slack_qr.png" alt="QR code to join the NLNAM Slack" width="160" >}}
+</div>
+
 <!-- Keep this block un-indented: 4+ spaces would make Goldmark treat it as an
 indented code block and render the markup as text instead of a form. -->
 <section>
